@@ -1,5 +1,6 @@
 <?php
-
+// configuration for the local development server
+const LOCAL_SSL = false;
 // Function to get the file extension or directory type
 function ext($file)
 {
@@ -168,7 +169,7 @@ $lang = isset($_GET['lang']) && in_array($_GET['lang'], ['es', 'en']) ? $_GET['l
             <?php foreach ($files as $file) : ?>
               <li class="list-group-item d-flex align-items-center">
                 <i class="bi <?php echo is_dir($file) ? 'bi-folder-fill' : 'bi-file-earmark-fill'; ?>"></i>
-                <a href="http://<?php echo htmlspecialchars(basename($file, '.' . ext($file))); ?>.test" target="_blank" class="flex-grow-1 text-decoration-none">
+                <a href="<?php echo (LOCAL_SSL ? 'https' : 'http'); ?>://<?php echo htmlspecialchars(basename($file, '.' . ext($file))); ?>.test" target="_blank" class="flex-grow-1 text-decoration-none">
                   <?php echo htmlspecialchars($file); ?>
                 </a>
                 <?php if (is_dir($file) && check_readme($dir . DIRECTORY_SEPARATOR . $file)) : ?>
